@@ -31,7 +31,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb+srv://gavithrachatgpt:2TRO9WVJg5EMQY2e@cluster0.pwe9uja.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_URI=mongodb://mongo:27017/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -43,7 +43,7 @@ services:
     depends_on:
       - user-service
     environment:
-      - MONGO_URI=mongodb+srv://gavithrachatgpt:2TRO9WVJg5EMQY2e@cluster0.pwe9uja.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_URI=mongodb://mongo:27017/auth_db
     restart: always
     networks:
       - ecommerce-network
@@ -55,7 +55,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb+srv://hansaniprojects:hxflRjA243ryRSU0@cluster0.uc7gq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_URI=mongodb://mongo:27017/product_db
     restart: always
     networks:
       - ecommerce-network
@@ -67,7 +67,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb+srv://hansaniprojects:7UMrJiW9CFk07IyP@orderdb-ctse.efhov85.mongodb.net/?retryWrites=true&w=majority&appName=OrderDB-CTSE
+      - MONGO_URI=mongodb://mongo:27017/order_db
     restart: always
     networks:
       - ecommerce-network
@@ -79,7 +79,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb+srv://Itp1234:Itp1234@cluster1.7wgentw.mongodb.net/LOgix_Fleet_Management_System_db?retryWrites=true&w=majority
+      - MONGO_URI=mongodb://mongo:27017/inventory_db
     restart: always
     networks:
       - ecommerce-network
@@ -91,7 +91,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb+srv://Itp1234:Itp1234@cluster1.7wgentw.mongodb.net/LOgix_Fleet_Management_System_db?retryWrites=true&w=majority
+      - MONGO_URI=mongodb://mongo:27017/cart_db
     restart: always
     networks:
       - ecommerce-network
@@ -103,7 +103,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_URI=mongodb+srv://Itp1234:Itp1234@cluster1.7wgentw.mongodb.net/LOgix_Fleet_Management_System_db?retryWrites=true&w=majority
+      - MONGO_URI=mongodb://mongo:27017/payment_db
     restart: always
     networks:
       - ecommerce-network
@@ -112,7 +112,7 @@ services:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - "27018:27017"
+      - "27017"
     volumes:
       - mongo-data:/data/db
     networks:
