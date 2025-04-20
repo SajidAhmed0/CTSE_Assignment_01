@@ -1,0 +1,44 @@
+name: Snyk Docker Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  snyk-docker-scan:
+    name: Snyk Docker Image Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Authenticate with Snyk
+      - name: Auth with Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      # List of Microservices to Scan
+      - name: Build & Scan Microservices
+        run: |
+          services=(auth-service user-service product-service order-service inventory-service cart-service payment-service)
+
+          for service in "${services[@]}"
+          do
+            echo "🔨 Building image for $service..."
+            docker build -t $service:latest ./$service
+
+            echo "🔍 Scanning $service image with Snyk..."
+            snyk test --docker $service:latest --file=./$service/Dockerfile --severity-threshold=high || true
+          done
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Done
+        run: echo "✅ All images scanned"
