@@ -68,7 +68,6 @@
 
 
 const Inventory = require("../models/Inventory");
-const axios = require("axios");
 
 // GET all inventory items
 exports.getAllItems = async (req, res) => {
