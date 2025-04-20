@@ -1,0 +1,86 @@
+name: 🚀 Deploy Microservices to AWS ECS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-to-ecs:
+    name: 🔁 ECS Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🔐 Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
+      # --- Auth Service ---
+      - name: 🚀 Deploy auth-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service auth-service \
+            --force-new-deployment
+
+    #   # --- User Service ---
+    #   - name: 🚀 Deploy user-service to ECS
+    #     run: |
+    #       aws ecs update-service \
+    #         --cluster ecommerce-cluster \
+    #         --service user-service \
+    #         --force-new-deployment
+
+      # --- Product Service ---
+      - name: 🚀 Deploy product-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service product-service \
+            --force-new-deployment
+
+      # --- Order Service ---
+      - name: 🚀 Deploy order-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service order-service \
+            --force-new-deployment
+
+      # --- Cart Service ---
+      - name: 🚀 Deploy cart-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service cart-service \
+            --force-new-deployment
+
+      # --- Inventory Service ---
+      - name: 🚀 Deploy inventory-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service inventory-service \
+            --force-new-deployment
+
+      # --- Payment Service ---
+      - name: 🚀 Deploy payment-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service payment-service \
+            --force-new-deployment
+
+      # --- API Gateway ---
+      - name: 🚀 Deploy api-gateway to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service api-gateway \
+            --force-new-deployment
