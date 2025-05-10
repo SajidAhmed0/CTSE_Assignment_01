@@ -4,7 +4,7 @@ services:
   api-gateway:
     build: ./api-gateway
     ports:
-      - "8085:8080"
+      - '8085:8080'
     environment:
       - USER_SERVICE_URL=http://user-service:5001
       - AUTH_SERVICE_URL=http://auth-service:5002
@@ -27,11 +27,9 @@ services:
   user-service:
     build: ./user-service
     ports:
-      - "5009:5001"
-    depends_on:
-      - mongo
+      - '5009:5001'
     environment:
-      - MONGO_URI=mongodb://mongo:27017/user_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -39,11 +37,11 @@ services:
   auth-service:
     build: ./auth-service
     ports:
-      - "5010:5002"
+      - '5010:5002'
     depends_on:
       - user-service
     environment:
-      - MONGO_URI=mongodb://mongo:27017/auth_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -51,11 +49,9 @@ services:
   product-service:
     build: ./product-service
     ports:
-      - "5011:5003"
-    depends_on:
-      - mongo
+      - '5011:5003'
     environment:
-      - MONGO_URI=mongodb://mongo:27017/product_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -63,11 +59,9 @@ services:
   order-service:
     build: ./order-service
     ports:
-      - "5012:5004"
-    depends_on:
-      - mongo
+      - '5012:5004'
     environment:
-      - MONGO_URI=mongodb://mongo:27017/order_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -75,11 +69,9 @@ services:
   inventory-service:
     build: ./inventory-service
     ports:
-      - "5013:5005"
-    depends_on:
-      - mongo
+      - '5013:5005'
     environment:
-      - MONGO_URI=mongodb://mongo:27017/inventory_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -87,11 +79,9 @@ services:
   cart-service:
     build: ./cart-service
     ports:
-      - "5014:5006"
-    depends_on:
-      - mongo
+      - '5014:5006'
     environment:
-      - MONGO_URI=mongodb://mongo:27017/cart_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
@@ -99,25 +89,12 @@ services:
   payment-service:
     build: ./payment-service
     ports:
-      - "5015:5007"
-    depends_on:
-      - mongo
+      - '5015:5007'
     environment:
-      - MONGO_URI=mongodb://mongo:27017/payment_db
+      - MONGO_URI=mongodb+srv://admin:admin@cluster0.x9m8y.mongodb.net/user_db
     restart: always
     networks:
       - ecommerce-network
-
-  mongo:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017"
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - ecommerce-network
-    restart: always
 
 networks:
   ecommerce-network:
