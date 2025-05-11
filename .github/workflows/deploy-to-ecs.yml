@@ -19,7 +19,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+          aws-region: us-east-1
 
       # --- Auth Service ---
       - name: 🚀 Deploy auth-service to ECS
@@ -29,13 +29,13 @@ jobs:
             --service auth-service \
             --force-new-deployment
 
-    #   # --- User Service ---
-    #   - name: 🚀 Deploy user-service to ECS
-    #     run: |
-    #       aws ecs update-service \
-    #         --cluster ecommerce-cluster \
-    #         --service user-service \
-    #         --force-new-deployment
+      #   # --- User Service ---
+      #   - name: 🚀 Deploy user-service to ECS
+      #     run: |
+      #       aws ecs update-service \
+      #         --cluster ecommerce-cluster \
+      #         --service user-service \
+      #         --force-new-deployment
 
       # --- Product Service ---
       - name: 🚀 Deploy product-service to ECS
