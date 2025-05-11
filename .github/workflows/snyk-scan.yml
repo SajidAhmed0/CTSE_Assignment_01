@@ -40,4 +40,4 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Done
-        run: echo "✅ All images scanned successfully"
+        run: echo "✅ All images scanned"
