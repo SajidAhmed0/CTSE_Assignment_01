@@ -27,7 +27,7 @@ jobs:
       # List of Microservices to Scan
       - name: Build & Scan Microservices
         run: |
-          services=(auth-service user-service product-service order-service inventory-service cart-service payment-service)
+          services=(backend/auth-service backend/user-service backend/product-service backend/order-service backend/inventory-service backend/cart-service backend/payment-service)
 
           for service in "${services[@]}"
           do
