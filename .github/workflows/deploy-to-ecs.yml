@@ -21,28 +21,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # --- Auth Service ---
-      - name: 🚀 Deploy auth-service to ECS
-        run: |
-          aws ecs update-service \
-            --cluster ecommerce-cluster \
-            --service auth-service \
-            --force-new-deployment
+      # # --- Auth Service ---
+      # - name: 🚀 Deploy auth-service to ECS
+      #   run: |
+      #     aws ecs update-service \
+      #       --cluster ecommerce-cluster \
+      #       --service auth-service \
+      #       --force-new-deployment
 
-      #   # --- User Service ---
-      #   - name: 🚀 Deploy user-service to ECS
-      #     run: |
-      #       aws ecs update-service \
-      #         --cluster ecommerce-cluster \
-      #         --service user-service \
-      #         --force-new-deployment
+        # --- User Service ---
+        - name: 🚀 Deploy user-service to ECS
+          run: |
+            aws ecs update-service \
+              --cluster ecommerce-cluster \
+              --service backend-user-service \
+              --force-new-deployment
 
       # --- Product Service ---
       - name: 🚀 Deploy product-service to ECS
         run: |
           aws ecs update-service \
             --cluster ecommerce-cluster \
-            --service product-service \
+            --service backend-product-service-task-service \
             --force-new-deployment
 
       # --- Order Service ---
@@ -50,37 +50,37 @@ jobs:
         run: |
           aws ecs update-service \
             --cluster ecommerce-cluster \
-            --service order-service \
+            --service backend-order-service-task-service \
             --force-new-deployment
 
-      # --- Cart Service ---
-      - name: 🚀 Deploy cart-service to ECS
-        run: |
-          aws ecs update-service \
-            --cluster ecommerce-cluster \
-            --service cart-service \
-            --force-new-deployment
+      # # --- Cart Service ---
+      # - name: 🚀 Deploy cart-service to ECS
+      #   run: |
+      #     aws ecs update-service \
+      #       --cluster ecommerce-cluster \
+      #       --service cart-service \
+      #       --force-new-deployment
 
       # --- Inventory Service ---
       - name: 🚀 Deploy inventory-service to ECS
         run: |
           aws ecs update-service \
             --cluster ecommerce-cluster \
-            --service inventory-service \
+            --service backend-inventory-service-task-service \
             --force-new-deployment
 
-      # --- Payment Service ---
-      - name: 🚀 Deploy payment-service to ECS
-        run: |
-          aws ecs update-service \
-            --cluster ecommerce-cluster \
-            --service payment-service \
-            --force-new-deployment
+      # # --- Payment Service ---
+      # - name: 🚀 Deploy payment-service to ECS
+      #   run: |
+      #     aws ecs update-service \
+      #       --cluster ecommerce-cluster \
+      #       --service payment-service \
+      #       --force-new-deployment
 
-      # --- API Gateway ---
-      - name: 🚀 Deploy api-gateway to ECS
-        run: |
-          aws ecs update-service \
-            --cluster ecommerce-cluster \
-            --service api-gateway \
-            --force-new-deployment
+      # # --- API Gateway ---
+      # - name: 🚀 Deploy api-gateway to ECS
+      #   run: |
+      #     aws ecs update-service \
+      #       --cluster ecommerce-cluster \
+      #       --service api-gateway \
+      #       --force-new-deployment
