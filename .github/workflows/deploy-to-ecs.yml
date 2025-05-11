@@ -29,13 +29,13 @@ jobs:
       #       --service auth-service \
       #       --force-new-deployment
 
-        # --- User Service ---
-        - name: 🚀 Deploy user-service to ECS
-          run: |
-            aws ecs update-service \
-              --cluster ecommerce-cluster \
-              --service backend-user-service \
-              --force-new-deployment
+      # --- User Service ---
+      - name: 🚀 Deploy user-service to ECS
+        run: |
+          aws ecs update-service \
+            --cluster ecommerce-cluster \
+            --service backend-user-service \
+            --force-new-deployment
 
       # --- Product Service ---
       - name: 🚀 Deploy product-service to ECS
